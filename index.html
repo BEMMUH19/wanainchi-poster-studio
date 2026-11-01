@@ -232,6 +232,11 @@ function generatePoster() {
     const time = document.getElementById("time").value;
     const venue = document.getElementById("venue").value;
     const photo = document.getElementById("photo").files[0];
+    const club = document.getElementById("club").value;
+
+const logoPath = club === "sports"
+    ? "assets/wanainchi-sports-club.png"
+    : "assets/wanainchi-hdf.png";
 
     if (!opponent) {
         alert("Please enter an opponent or event name.");
@@ -257,9 +262,11 @@ function generatePoster() {
                 text-align:center;
                 overflow:hidden;
             ">
-                <h1 style="color:#f4b400;font-size:30px;">
-                    WANAINCHI
-                </h1>
+                <img src="${logoPath}"
+     style="max-width:150px;
+     max-height:90px;
+     object-fit:contain;
+     margin-bottom:10px;">
 
                 <h2 style="color:white;">
                     ${category.toUpperCase()}
