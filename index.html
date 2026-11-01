@@ -156,11 +156,18 @@ button:hover { background: #ffd04a; }
         <section class="panel">
             <h2>01. Create Your Poster</h2>
 
-            <label>Select Organisation</label>
-            <select id="club">
-                <option>Wanainchi Sports Club</option>
-                <option>Wanainchi HDF</option>
-            </select>
+         <label>Select Organisation</label>
+
+<select id="club" onchange="updateLogo()">
+    <option value="sports">Wanainchi Sports Club</option>
+    <option value="hdf">Wanainchi HDF</option>
+</select>
+
+<div style="text-align:center; margin-top:15px;">
+    <img id="clubLogo"
+         src="assets/wanainchi-sports-club.png"
+         style="max-width:130px; max-height:100px; object-fit:contain;">
+</div>
 
             <label>Poster Category</label>
             <select id="category">
