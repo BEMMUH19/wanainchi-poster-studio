@@ -178,8 +178,11 @@ button:hover { background: #ffd04a; }
                 <option>Player Spotlight</option>
             </select>
 
-            <label>Opponent / Event Name</label>
-            <input id="opponent" placeholder="Enter opponent or event">
+            <label>Our Team</label>
+<input id="ourTeam" placeholder="Enter our team name">
+
+<label>Opponent</label>
+<input id="opponent" placeholder="Enter opponent name">
 
             <label>Match Date</label>
             <input id="date" type="date">
@@ -227,6 +230,7 @@ button:hover { background: #ffd04a; }
 function generatePoster() {
    
     const opponent = document.getElementById("opponent").value;
+    const ourTeam = document.getElementById("ourTeam").value;
     const category = document.getElementById("category").value;
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
@@ -238,10 +242,10 @@ const logoPath = club === "sports"
     ? "assets/wanainchi-sports-club.png"
     : "assets/wanainchi-hdf.png";
 
-    if (!opponent) {
-        alert("Please enter an opponent or event name.");
-        return;
-    }
+    if (!ourTeam || !opponent) {
+    alert("Please enter both team names.");
+    return;
+}
 
     const preview = document.getElementById("preview");
     const reader = new FileReader();
@@ -278,13 +282,25 @@ const logoPath = club === "sports"
                     object-fit:cover;border-radius:8px;">
                 ` : ""}
 
-                <h1 style="color:white;font-size:35px;">
-                    VS
-                </h1>
+                <div style="display:flex;
+            justify-content:space-around;
+            align-items:center;
+            width:100%;
+            gap:10px;">
 
-                <h2 style="color:#f4b400;">
-                    ${opponent.toUpperCase()}
-                </h2>
+    <h2 style="color:white;flex:1;">
+        ${ourTeam.toUpperCase()}
+    </h2>
+
+    <h1 style="color:#f4b400;font-size:32px;">
+        VS
+    </h1>
+
+    <h2 style="color:white;flex:1;">
+        ${opponent.toUpperCase()}
+    </h2>
+
+</div>
 
                 <p style="color:white;">
                     ${date} ${time}
