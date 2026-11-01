@@ -1,14 +1,232 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanainchi Poster Maker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanainchi Poster Studio</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #101116;
+    color: white;
+}
+
+header {
+    padding: 22px 6%;
+    background: #191b23;
+    border-bottom: 1px solid #30323c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span { color: #f4b400; }
+
+header small { color: #999; }
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.welcome {
+    margin-bottom: 30px;
+}
+
+.welcome h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.welcome p { color: #999; }
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.panel {
+    background: #1b1d26;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #30323c;
+}
+
+h2 {
+    font-size: 19px;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #bbb;
+    font-size: 13px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    background: #101116;
+    border: 1px solid #383b47;
+    border-radius: 7px;
+    color: white;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #f4b400;
+}
+
+.upload {
+    border: 2px dashed #494c59;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 18px;
+    color: #aaa;
+}
+
+button {
+    background: #f4b400;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover { background: #ffd04a; }
+
+.preview {
+    min-height: 470px;
+    background: #11131a;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.preview h1 {
+    font-size: 34px;
+    color: #f4b400;
+}
+
+.preview p { color: #aaa; }
+
+@media(max-width: 800px) {
+    .workspace { grid-template-columns: 1fr; }
+}
+</style>
 </head>
+
 <body>
 
-    <h1>WANAINCHI POSTER MAKER</h1>
-    <p>Professional sports posters, made simple.</p>
+<header>
+    <div class="logo">WANAINCHI <span>STUDIO</span></div>
+    <small>SPORTS POSTER CREATOR</small>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h1>Welcome to Poster Studio</h1>
+        <p>Create professional sports posters for your teams.</p>
+    </div>
+
+    <div class="workspace">
+
+        <section class="panel">
+            <h2>01. Create Your Poster</h2>
+
+            <label>Select Organisation</label>
+            <select id="club">
+                <option>Wanainchi Sports Club</option>
+                <option>Wanainchi HDF</option>
+            </select>
+
+            <label>Poster Category</label>
+            <select id="category">
+                <option>Matchday</option>
+                <option>Fixture Announcement</option>
+                <option>Full Time Result</option>
+                <option>Tournament Announcement</option>
+                <option>Player Spotlight</option>
+            </select>
+
+            <label>Opponent / Event Name</label>
+            <input id="opponent" placeholder="Enter opponent or event">
+
+            <label>Match Date</label>
+            <input id="date" type="date">
+
+            <label>Match Time</label>
+            <input id="time" type="time">
+
+            <label>Venue</label>
+            <input id="venue" placeholder="Enter venue">
+
+            <label>Upload Match Photo</label>
+            <div class="upload">
+                <input id="photo" type="file" accept="image/*">
+                <p>Choose your team or action photo</p>
+            </div>
+
+            <br>
+            <button onclick="generatePoster()">GENERATE POSTER</button>
+        </section>
+
+        <section class="panel">
+            <h2>02. Poster Preview</h2>
+
+            <div class="preview" id="preview">
+                <h1>WANAINCHI</h1>
+                <p>YOUR NEXT GREAT POSTER STARTS HERE</p>
+                <p>Upload a photo and enter match details.</p>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+function generatePoster() {
+    const opponent = document.getElementById("opponent").value;
+    const category = document.getElementById("category").value;
+
+    if (!opponent) {
+        alert("Please enter an opponent or event name.");
+        return;
+    }
+
+    document.getElementById("preview").innerHTML = `
+        <h1>WANAINCHI</h1>
+        <h2>${category.toUpperCase()}</h2>
+        <h1>VS</h1>
+        <h2>${opponent.toUpperCase()}</h2>
+        <p>${document.getElementById("date").value}</p>
+        <p>${document.getElementById("time").value}</p>
+        <p>${document.getElementById("venue").value}</p>
+    `;
+}
+</script>
 
 </body>
 </html>
