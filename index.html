@@ -211,11 +211,14 @@ button:hover { background: #ffd04a; }
                 <p>YOUR NEXT GREAT POSTER STARTS HERE</p>
                 <p>Upload a photo and enter match details.</p>
             </div>
+            <button onclick="downloadPoster()" style="margin-top:15px;width:100%;">
+    DOWNLOAD POSTER
+</button>
         </section>
 
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
     function updateLogo() {
     const club = document.getElementById("club").value;
@@ -321,6 +324,31 @@ padding:25px;
         reader.readAsDataURL(photo);
     } else {
         displayPoster();
+    }
+}
+async function downloadPoster() {
+    const poster = document.getElementById("preview");
+
+    if (!poster.querySelector("img")) {
+        alert("Please generate a poster first.");
+        return;
+    }
+
+    try {
+        const canvas = await html2canvas(poster, {
+            scale: 3,
+            useCORS: true,
+            backgroundColor: "#11131a"
+        });
+
+        const link = document.createElement("a");
+        link.download = "Wanainchi-Poster.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+    } catch (error) {
+        alert("Unable to download poster. Please try again.");
+        console.error(error);
     }
 }
 </script>
