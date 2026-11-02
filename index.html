@@ -269,6 +269,8 @@ const playerAchievement = document.getElementById("playerAchievement").value;
 const logoPath = club === "sports"
     ? "assets/wanainchi-sports-club.png"
     : "assets/wanainchi-hdf.png";
+    const primaryColor = club === "sports" ? "#f4d000" : "#e31b23";
+const secondaryColor = club === "sports" ? "#087a3e" : "#ffffff";
 
    if (category !== "Player Spotlight" && (!ourTeam || !opponent)) {
     alert("Please enter both team names.");
@@ -298,7 +300,7 @@ padding:25px;
     : design === "modern"
     ? "linear-gradient(160deg, #252a35, #111827)"
     : "linear-gradient(160deg, #181818, #303030)"};
-                border:2px solid #f4b400;
+                border:2px solid ${primaryColor};
                 border-radius:10px;
                 display:flex;
                 flex-direction:column;
@@ -326,7 +328,7 @@ padding:25px;
         ${category === "Player Spotlight" ? `
     <div style="text-align:center;width:100%;">
 
-        <h1 style="color:#f4b400;font-size:32px;">
+        <h1 style="color:${primaryColor};"font-size:32px;">
             PLAYER SPOTLIGHT
         </h1>
 
@@ -334,7 +336,7 @@ padding:25px;
             ${playerName.toUpperCase()}
         </h1>
 
-        <h2 style="color:#f4b400;">
+        <h2 style="color:${primaryColor};">
             ${playerPosition.toUpperCase()}
         </h2>
 
@@ -355,13 +357,13 @@ padding:25px;
                 ${ourTeam.toUpperCase()}
             </h2>
             ${category === "Full Time Result" ? `
-                <h1 style="color:#f4b400;font-size:48px;">
+                <h1 style="color:${primaryColor};font-size:48px;">
                     ${ourScore}
                 </h1>
             ` : ""}
         </div>
 
-        <h1 style="color:#f4b400;font-size:32px;">
+        <h1 style="color:${primaryColor};font-size:32px;">
             ${category === "Full Time Result" ? ":" : "VS"}
         </h1>
 
@@ -370,7 +372,7 @@ padding:25px;
                 ${opponent.toUpperCase()}
             </h2>
             ${category === "Full Time Result" ? `
-                <h1 style="color:#f4b400;font-size:48px;">
+                <h1 style="color:${primaryColor};font-size:48px;">
                     ${opponentScore}
                 </h1>
             ` : ""}
@@ -378,7 +380,7 @@ padding:25px;
 
     </div>
 `}
-    <h1 style="color:#f4b400;font-size:32px;">
+    <h1 style="color:${primaryColor};font-size:32px;">
         ${category === "Full Time Result" ? ":" : "VS"}
     </h1>
 
@@ -387,7 +389,7 @@ padding:25px;
             ${opponent.toUpperCase()}
         </h2>
         ${category === "Full Time Result" ? `
-            <h1 style="color:#f4b400;font-size:48px;">
+            <h1 style="color:${primaryColor};font-size:48px;">
                 ${opponentScore}
             </h1>
         ` : ""}
