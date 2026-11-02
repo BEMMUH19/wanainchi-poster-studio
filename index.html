@@ -177,6 +177,12 @@ button:hover { background: #ffd04a; }
                 <option>Tournament Announcement</option>
                 <option>Player Spotlight</option>
             </select>
+            <label>Choose Poster Design</label>
+<select id="design">
+    <option value="stadium">Stadium Energy</option>
+    <option value="modern">Modern Professional</option>
+    <option value="minimal">Clean Minimal</option>
+</select>
 
             <label>Our Team</label>
 <input id="ourTeam" placeholder="Enter our team name">
@@ -250,6 +256,7 @@ function generatePoster() {
     const ourScore = document.getElementById("ourScore").value;
 const opponentScore = document.getElementById("opponentScore").value;
     const category = document.getElementById("category").value;
+    const design = document.getElementById("design").value;
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const venue = document.getElementById("venue").value;
@@ -286,7 +293,11 @@ if (category === "Full Time Result" && (ourScore === "" || opponentScore === "")
 aspect-ratio:4 / 5;
 min-height:500px;
 padding:25px;
-                background:linear-gradient(160deg,#171923,#090a0e);
+                background:${design === "stadium"
+    ? "linear-gradient(160deg, #263858, #080b14)"
+    : design === "modern"
+    ? "linear-gradient(160deg, #252a35, #111827)"
+    : "linear-gradient(160deg, #181818, #303030)"};
                 border:2px solid #f4b400;
                 border-radius:10px;
                 display:flex;
