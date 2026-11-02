@@ -197,6 +197,14 @@ button:hover { background: #ffd04a; }
 
             <label>Venue</label>
             <input id="venue" placeholder="Enter venue">
+            <label>Player Name</label>
+<input id="playerName" placeholder="Enter player name">
+
+<label>Player Position</label>
+<input id="playerPosition" placeholder="Enter player position">
+
+<label>Player Achievement</label>
+<input id="playerAchievement" placeholder="Enter achievement or statistics">
 
             <label>Upload Match Photo</label>
             <div class="upload">
@@ -245,6 +253,9 @@ const opponentScore = document.getElementById("opponentScore").value;
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const venue = document.getElementById("venue").value;
+    const playerName = document.getElementById("playerName").value;
+const playerPosition = document.getElementById("playerPosition").value;
+const playerAchievement = document.getElementById("playerAchievement").value;
     const photo = document.getElementById("photo").files[0];
     const club = document.getElementById("club").value;
 
@@ -252,8 +263,13 @@ const logoPath = club === "sports"
     ? "assets/wanainchi-sports-club.png"
     : "assets/wanainchi-hdf.png";
 
-    if (!ourTeam || !opponent) {
+   if (category !== "Player Spotlight" && (!ourTeam || !opponent)) {
     alert("Please enter both team names.");
+    return;
+}
+
+if (category === "Player Spotlight" && !playerName) {
+    alert("Please enter the player's name.");
     return;
 }
 if (category === "Full Time Result" && (ourScore === "" || opponentScore === "")) {
@@ -296,23 +312,61 @@ padding:25px;
                     object-fit:cover;border-radius:8px;">
                 ` : ""}
 
-         <div style="display:flex;
-            justify-content:space-around;
-            align-items:center;
-            width:100%;
-            gap:10px;">
+        ${category === "Player Spotlight" ? `
+    <div style="text-align:center;width:100%;">
 
-    <div style="flex:1;">
-        <h2 style="color:white;">
-            ${ourTeam.toUpperCase()}
+        <h1 style="color:#f4b400;font-size:32px;">
+            PLAYER SPOTLIGHT
+        </h1>
+
+        <h1 style="color:white;font-size:38px;">
+            ${playerName.toUpperCase()}
+        </h1>
+
+        <h2 style="color:#f4b400;">
+            ${playerPosition.toUpperCase()}
         </h2>
-        ${category === "Full Time Result" ? `
-            <h1 style="color:#f4b400;font-size:48px;">
-                ${ourScore}
-            </h1>
-        ` : ""}
-    </div>
 
+        <p style="color:white;font-size:18px;">
+            ${playerAchievement}
+        </p>
+
+    </div>
+` : `
+    <div style="display:flex;
+                justify-content:space-around;
+                align-items:center;
+                width:100%;
+                gap:10px;">
+
+        <div style="flex:1;">
+            <h2 style="color:white;">
+                ${ourTeam.toUpperCase()}
+            </h2>
+            ${category === "Full Time Result" ? `
+                <h1 style="color:#f4b400;font-size:48px;">
+                    ${ourScore}
+                </h1>
+            ` : ""}
+        </div>
+
+        <h1 style="color:#f4b400;font-size:32px;">
+            ${category === "Full Time Result" ? ":" : "VS"}
+        </h1>
+
+        <div style="flex:1;">
+            <h2 style="color:white;">
+                ${opponent.toUpperCase()}
+            </h2>
+            ${category === "Full Time Result" ? `
+                <h1 style="color:#f4b400;font-size:48px;">
+                    ${opponentScore}
+                </h1>
+            ` : ""}
+        </div>
+
+    </div>
+`}
     <h1 style="color:#f4b400;font-size:32px;">
         ${category === "Full Time Result" ? ":" : "VS"}
     </h1>
