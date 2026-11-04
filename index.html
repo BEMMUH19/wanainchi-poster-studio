@@ -428,13 +428,20 @@ ${category === "Player Spotlight" ? `
         `;
     }
 
-   function readPhoto(file) {
-    return new Promise((resolve, reject) => {
-        if (!file) {
-            resolve("");
-            return;
-        }
+ async function readPhoto(file) {
+    if (!file) {
+        return "";
+    }
 
+    if (!window.removeBackground) {
+        throw new Error("Background remover is not ready. Please refresh the page.");
+    }
+
+    const result = await window.removeBackground(file, {
+        quality: "quality"
+    });
+
+    return new Promise((resolve, reject) => {
         const imageReader = new FileReader();
 
         imageReader.onload = function(event) {
@@ -442,7 +449,7 @@ ${category === "Player Spotlight" ? `
         };
 
         imageReader.onerror = reject;
-        imageReader.readAsDataURL(file);
+        imageReader.readAsDataURL(result.blob);
     });
 }
 
