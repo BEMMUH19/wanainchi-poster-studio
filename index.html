@@ -361,8 +361,7 @@ padding:20px;
 
     </div>
 ` : ""}
-
-        ${category === "Player Spotlight" ? `
+${category === "Player Spotlight" ? `
     <div style="text-align:center;width:100%;">
 
         <h1 style="color:${primaryColor};font-size:32px;">
@@ -390,9 +389,9 @@ padding:20px;
                 gap:10px;">
 
         <div style="flex:1;">
-          <h2 style="color:white;">
-    ${ourTeam.toUpperCase()}
-</h2>
+            <h2 style="color:white;">
+                ${ourTeam.toUpperCase()}
+            </h2>
             ${category === "Full Time Result" ? `
                 <h1 style="color:${primaryColor};font-size:48px;">
                     ${ourScore}
@@ -400,24 +399,23 @@ padding:20px;
             ` : ""}
         </div>
 
-       
-`}
-    <h1 style="color:${primaryColor};font-size:32px;">
-        ${category === "Full Time Result" ? ":" : "VS"}
-    </h1>
+        <h1 style="color:${primaryColor};font-size:32px;">
+            ${category === "Full Time Result" ? ":" : "VS"}
+        </h1>
 
-    <div style="flex:1;">
-        <h2 style="color:white;">
-            ${opponent.toUpperCase()}
-        </h2>
-        ${category === "Full Time Result" ? `
-            <h1 style="color:${primaryColor};font-size:48px;">
-                ${opponentScore}
-            </h1>
-        ` : ""}
+        <div style="flex:1;">
+            <h2 style="color:white;">
+                ${opponent.toUpperCase()}
+            </h2>
+            ${category === "Full Time Result" ? `
+                <h1 style="color:${primaryColor};font-size:48px;">
+                    ${opponentScore}
+                </h1>
+            ` : ""}
+        </div>
+
     </div>
-
-</div>
+`}
 
                 <p style="color:white;">
                     ${date} ${time}
