@@ -217,6 +217,11 @@ button:hover { background: #ffd04a; }
                 <input id="photo" type="file" accept="image/*">
                 <p>Choose your team or action photo</p>
             </div>
+            <label>Upload Second Player Photo</label>
+<div class="upload">
+    <input id="photo2" type="file" accept="image/*">
+    <p>Choose another player photo</p>
+</div>
 
             <br>
             <button onclick="generatePoster()">GENERATE POSTER</button>
@@ -264,6 +269,7 @@ const opponentScore = document.getElementById("opponentScore").value;
 const playerPosition = document.getElementById("playerPosition").value;
 const playerAchievement = document.getElementById("playerAchievement").value;
     const photo = document.getElementById("photo").files[0];
+    const photo2 = document.getElementById("photo2").files[0];
     const club = document.getElementById("club").value;
 
 const logoPath = club === "sports"
@@ -288,7 +294,7 @@ if (category === "Full Time Result" && (ourScore === "" || opponentScore === "")
     const preview = document.getElementById("preview");
     const reader = new FileReader();
 
-    function displayPoster(imageUrl = "") {
+    function displayPoster(imageUrl = "", imageUrl2 = "") {
         preview.innerHTML = `
             <div style="
                 width:100%;
@@ -319,11 +325,41 @@ padding:25px;
     ${category.toUpperCase()}
 </h2>
 
-                ${imageUrl ? `
-                    <img src="${imageUrl}"
-                    style="width:100%;max-height:230px;
-                    object-fit:cover;border-radius:8px;">
-                ` : ""}
+                ${imageUrl || imageUrl2 ? `
+    <div style="
+        position:relative;
+        width:100%;
+        height:300px;
+        margin:10px 0;
+        overflow:hidden;
+    ">
+
+        ${imageUrl ? `
+            <img src="${imageUrl}" style="
+                position:absolute;
+                left:0;
+                top:0;
+                width:78%;
+                height:100%;
+                object-fit:cover;
+                object-position:center;
+            ">
+        ` : ""}
+
+        ${imageUrl2 ? `
+            <img src="${imageUrl2}" style="
+                position:absolute;
+                right:0;
+                bottom:0;
+                width:62%;
+                height:85%;
+                object-fit:contain;
+                object-position:bottom;
+            ">
+        ` : ""}
+
+    </div>
+` : ""}
 
         ${category === "Player Spotlight" ? `
     <div style="text-align:center;width:100%;">
@@ -408,14 +444,32 @@ padding:25px;
         `;
     }
 
-    if (photo) {
-        reader.onload = function(event) {
-            displayPoster(event.target.result);
+   function readPhoto(file) {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            resolve("");
+            return;
+        }
+
+        const imageReader = new FileReader();
+
+        imageReader.onload = function(event) {
+            resolve(event.target.result);
         };
-        reader.readAsDataURL(photo);
-    } else {
-        displayPoster();
-    }
+
+        imageReader.onerror = reject;
+        imageReader.readAsDataURL(file);
+    });
+}
+
+Promise.all([
+    readPhoto(photo),
+    readPhoto(photo2)
+]).then(([imageUrl, imageUrl2]) => {
+    displayPoster(imageUrl, imageUrl2);
+}).catch(error => {
+    alert("Unable to load the photographs.");
+});
 }
 async function downloadPoster() {
     const poster = document.getElementById("preview");
