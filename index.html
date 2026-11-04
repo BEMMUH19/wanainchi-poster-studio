@@ -297,10 +297,11 @@ if (category === "Full Time Result" && (ourScore === "" || opponentScore === "")
     function displayPoster(imageUrl = "", imageUrl2 = "") {
         preview.innerHTML = `
             <div style="
-                width:100%;
-aspect-ratio:4 / 5;
-min-height:500px;
-padding:25px;
+          width:100%;
+max-width:360px;
+aspect-ratio:9 / 16;
+min-height:640px;
+padding:20px;
                 background:${design === "stadium"
     ? "linear-gradient(160deg, #263858, #080b14)"
     : design === "modern"
@@ -364,7 +365,7 @@ padding:25px;
         ${category === "Player Spotlight" ? `
     <div style="text-align:center;width:100%;">
 
-        <h1 style="color:${primaryColor};"font-size:32px;">
+        <h1 style="color:${primaryColor};font-size:32px;">
             PLAYER SPOTLIGHT
         </h1>
 
@@ -399,22 +400,7 @@ padding:25px;
             ` : ""}
         </div>
 
-        <h1 style="color:${primaryColor};font-size:32px;">
-            ${category === "Full Time Result" ? ":" : "VS"}
-        </h1>
-
-        <div style="flex:1;">
-            <h2 style="color:${secondaryColor};">
-    ${opponent.toUpperCase()}
-</h2>
-            ${category === "Full Time Result" ? `
-                <h1 style="color:${primaryColor};font-size:48px;">
-                    ${opponentScore}
-                </h1>
-            ` : ""}
-        </div>
-
-    </div>
+       
 `}
     <h1 style="color:${primaryColor};font-size:32px;">
         ${category === "Full Time Result" ? ":" : "VS"}
