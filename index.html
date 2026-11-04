@@ -314,10 +314,10 @@ padding:25px;
      max-height:90px;
      object-fit:contain;
      margin-bottom:10px;">
-
-                <h2 style="color:white;">
-                    ${category.toUpperCase()}
-                </h2>
+     
+<h2 style="color:${secondaryColor};">
+    ${category.toUpperCase()}
+</h2>
 
                 ${imageUrl ? `
                     <img src="${imageUrl}"
@@ -353,9 +353,9 @@ padding:25px;
                 gap:10px;">
 
         <div style="flex:1;">
-            <h2 style="color:white;">
-                ${ourTeam.toUpperCase()}
-            </h2>
+          <h2 style="color:white;">
+    ${ourTeam.toUpperCase()}
+</h2>
             ${category === "Full Time Result" ? `
                 <h1 style="color:${primaryColor};font-size:48px;">
                     ${ourScore}
@@ -368,9 +368,9 @@ padding:25px;
         </h1>
 
         <div style="flex:1;">
-            <h2 style="color:white;">
-                ${opponent.toUpperCase()}
-            </h2>
+            <h2 style="color:${secondaryColor};">
+    ${opponent.toUpperCase()}
+</h2>
             ${category === "Full Time Result" ? `
                 <h1 style="color:${primaryColor};font-size:48px;">
                     ${opponentScore}
